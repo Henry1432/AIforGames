@@ -1,19 +1,23 @@
 local agents = {}
 
 function love.load ()
-	for i = 1, 500 do
+	--try changing 200 to 1000
+	--it looks like a boarder of red around the edge of the window
+	for i = 1, 200 do
 		table.insert (agents, 
 		{
+		--agent info
 			x=64, y=64,
 			radius = 8,
 			vx = (math.random() * 2 - 1) * 150, vy = (math.random() * 2 - 1) * 150,
 			crowded = false,
-			proximity = 12,
+			proximity = 20,
 		})
 	end
 end
 
 function love.update (dt)
+	--screen wrapping and velocity
 	local wWidth = love.graphics.getWidth()
 	local wHeight = love.graphics.getHeight()
 	for i, agent in ipairs (agents) do
@@ -22,7 +26,7 @@ function love.update (dt)
 		agent.x = agent.x % wWidth
 		agent.y = agent.y % wHeight
 		
-		
+		--crowded behavior
 		local count = 0
 		for j, agent2 in ipairs (agents) do
 			if (agent2.x < agent.x + agent.proximity) then
@@ -30,28 +34,25 @@ function love.update (dt)
 					if (agent2.y < agent.y + agent.proximity) then
 						if (agent2.y > agent.y - agent.proximity) then
 							count = count + 1
+							if(agent2.x  > agent.x) then
+								agent.vx = math.abs(agent.vx) * -1
+							else
+								agent.vx = math.abs(agent.vx)
+							end
+						
+							if(agent2.y  > agent.y) then
+								agent.vy = math.abs(agent.vy) * -1
+							else
+								agent.vy = math.abs(agent.vy)
+							end
 							
-							--local dx = agent2.x - agent.x
-							--local dy = agent2.y - agent.y
-							
-							--if (dx > 0 and vx >0) then
-							--	agent.vx = agent.vx *-1
-							--end
-							--if (dx < 0 and vx < 0) then
-							--	agent.vx = agent.vx*-1
-							--end
-							--if (dy > 0 and vy >0) then
-							--	agent.vy = agent.vy *-1
-							--end
-							--if (dy < 0 and vy < 0) then
-							--	agent.vy = agent.vy*-1
-							--end
 						end
 					end
 				end
 			end
 		end
 		
+		--draw red if true
 		if (count > 4) then
 			agent.crowded = true
 		else
@@ -61,6 +62,7 @@ function love.update (dt)
 
 end
 
+--drawing
 function love.draw ()
 	for i, agent in ipairs (agents) do
 		if agent.crowded then
@@ -69,8 +71,7 @@ function love.draw ()
 			love.graphics.setColor(1,1,1)
 		end
 		love.graphics.circle( "fill", agent.x, agent.y, 10)
-		
-			
 	end
 end
 
+-- :)
