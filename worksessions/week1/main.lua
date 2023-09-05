@@ -10,6 +10,8 @@ function love.load ()
 			x=64, y=64,
 			radius = 8,
 			vx = (math.random() * 2 - 1) * 150, vy = (math.random() * 2 - 1) * 150,
+			tx = vx, ty = vy,
+			ac = 5, 
 			crowded = false,
 			proximity = 20,
 			
@@ -27,6 +29,9 @@ function love.update (dt)
 		agent.y = agent.y + agent.vy * dt
 		agent.x = agent.x % wWidth
 		agent.y = agent.y % wHeight
+		
+		--current toward  target
+		
 		
 		--crowded behavior
 		local count = 0
