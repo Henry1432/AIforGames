@@ -1,15 +1,15 @@
 local Grid = require("grid")
 local Boids = require("boids")
 
-local tilemap = nil
+tilemap = nil
 
-local tile_width = 16
-local tile_height = 16
+tile_width = 16
+tile_height = 16
 
 
 function love.load()
   tilemap = Grid.new(64, 64)
-  Boids.init(200)
+  Boids.init(5)
 end
 
 function love.update(dt)
@@ -19,7 +19,11 @@ end
 function love.mousepressed(x, y, button)
   local gx = math.floor(x / tile_width)
   local gy = math.floor(y / tile_height)
-  tilemap:set(gx, gy, 1)
+  if(tilemap:get(gx, gy) == 1) then
+	tilemap:set(gx, gy, 0)
+  else
+	tilemap:set(gx, gy, 1)
+  end
 end
 
 function love.draw()
