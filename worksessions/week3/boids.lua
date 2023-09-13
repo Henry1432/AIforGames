@@ -39,7 +39,7 @@ local tilemap_avoidence_force = function(neighbors, self)
 		local right = false
 		local left = false
 		
-		if py < ty then 
+		if py < ty then
 			up = true
 		elseif py >  ty then
 			down = true
