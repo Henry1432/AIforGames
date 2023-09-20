@@ -2,8 +2,10 @@
 #include "Random.h"
 #include "RecursiveBacktrackerExample.h"
 #include <climits>
-bool RecursiveBacktrackerExample::Step(World* w) {
+bool RecursiveBacktrackerExample::Step(World* w) 
+{ 
 
+    return true; 
 }
 
 void RecursiveBacktrackerExample::Clear(World* world) {

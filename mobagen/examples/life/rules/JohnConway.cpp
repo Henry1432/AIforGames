@@ -10,7 +10,7 @@ void JohnConway::Step(World& world)
             auto currentPoint = Point2D(x, y);
             auto neighborCount = CountNeighbors(world, currentPoint);
 
-            /*if (world.Get(currentPoint))
+            if (world.Get(currentPoint))
             {
                 if (neighborCount <= 1) 
                 {
@@ -32,14 +32,15 @@ void JohnConway::Step(World& world)
                 {
                     world.SetNext(currentPoint, 1);
                 }
-            }*/
+            }
 
-            if (neighborCount > 4) {
+            //dungeon
+            /*if (neighborCount > 4) {
               world.SetNext(currentPoint, 1);
             }
             if (neighborCount < 3) {
               world.SetNext(currentPoint, 0);
-            }
+            }*/
                 
         }
     }

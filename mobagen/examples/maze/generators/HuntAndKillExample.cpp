@@ -2,8 +2,10 @@
 #include "../World.h"
 #include "Random.h"
 #include <climits>
-bool HuntAndKillExample::Step(World* w) {
+bool HuntAndKillExample::Step(World* w) 
+{
 
+    return true;
 }
 void HuntAndKillExample::Clear(World* world) {
   visited.clear();
