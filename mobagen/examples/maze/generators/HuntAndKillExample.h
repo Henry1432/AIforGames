@@ -13,6 +13,7 @@ private:
   Point2D randomStartPoint(World* world);
   std::vector<Point2D> getVisitables(World* w, const Point2D& p);
   std::vector<Point2D> getVisitedNeighbors(World* w, const Point2D& p);
+  bool move(World* w, Point2D& p, int& index, int& stackCount, bool& run);
 
 public:
   HuntAndKillExample() = default;
