@@ -38,8 +38,17 @@ Point2D Cat::Move(World* world) {
     if (moveTo.pos == goal.pos) {
       return goal.pos;
     }
+
+    if (world->catCanMoveToPosition(moveTo.pos))
+    {
+        return moveTo.pos;
+    }
+    else 
+    {
+        std::cout << " bad!\n";
+    }
+
     //return next move
-    return moveTo.pos;
 }
 
 // initial/reset goal find

@@ -69,7 +69,7 @@ Point2D Catcher::Move(World* world) {
     PathTile block = path[0];
     for (PathTile& pathTile : path)
     {
-        if (block.value < pathTile.value)
+        if (block.value < pathTile.value && !world->getContent(pathTile.pos))
         {
             block = pathTile;
         }
