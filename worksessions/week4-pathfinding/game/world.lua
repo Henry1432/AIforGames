@@ -1,12 +1,22 @@
 local World = {}
 World.__index = World
 
+
+local Shash = require("utils.shash-master.shash")
+local shash = nil
+
+
 function World.new(state)
     local self = setmetatable({}, World)
     self.search = {}
     self.monsters = {}
+    self.ants = {}
+    self.pList = {}
     self.hero = nil
     self.grid = nil
+	
+	self.shash = Shash.new(16)
+	
     return self
 end
 
