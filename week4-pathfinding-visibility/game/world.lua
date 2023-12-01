@@ -24,7 +24,7 @@ function World:random_spawn()
 			break
 		end
 	end
-	print(x, y)
+	
 	return x, y
 end
 

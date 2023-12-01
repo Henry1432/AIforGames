@@ -13,22 +13,22 @@ local bresenham = require("utils.bresenham")
 --end
 
 --look through the path:
-	--if any are walls count how far away the tile is from that wall
-	--failing that return -1
+	--if any are walls count and return how far away the tile is from that wall
+	--if there are no walls in the path it is visible, return -1
 local set_Visibility = function(grid, plot)
 	local count = -1
 	local startCount = false;
 	for i, v in ipairs(plot) do
-        if grid:get((v.x), (v.y)) then
-            startCount = true
+		if grid:get((v.x), (v.y)) then
+			startCount = true
 			count = 0
-        end
+		end
 		if(startCount) then
 			count = count + 1
 		end
-    end
-    
-    return count
+	end
+	
+	return count
 end
 
 return function(grid, x, y)
@@ -37,27 +37,27 @@ return function(grid, x, y)
 	frontier:push(vec(x, y))
 	local came_from_value = {}
 	came_from_value[grid:index_of(x, y)] = nil
-  
-  --turn this into visibility grid
-  --logic
-  while not frontier:empty() do
-	local cur = frontier:pop()
-	local neighbors = grid:get_neighbors(cur.x, cur.y)
-	for i, n in ipairs(neighbors) do
-		local index = grid:index_of(n.x, n.y)
-		local valid = grid:get(n.x, n.y) == false
-		local not_seen = came_from_value[index] == nil
+	
+	--grab current tile neighbors
+	while not frontier:empty() do
+		local cur = frontier:pop()
+		local neighbors = grid:get_neighbors(cur.x, cur.y)
 		
-		if valid and not_seen then
-			local plot = bresenham(x,y, n.x, n.y)
+		for i, n in ipairs(neighbors) do
+			local index = grid:index_of(n.x, n.y)
+			local valid = grid:get(n.x, n.y) == false
+			local not_seen = came_from_value[index] == nil
 			
-			local distance = set_Visibility(grid, plot)
-			frontier:push(vec(n.x, n.y))
-			came_from_value[index] = distance
+			--if valid and new add it to the visibility map
+			if valid and not_seen then
+				local plot = bresenham(x,y, n.x, n.y)
+				
+				local distance = set_Visibility(grid, plot)
+				frontier:push(vec(n.x, n.y))
+				--any values over 0 are not visible, all visible tiles are set to -1
+				came_from_value[index] = distance
+			end
 		end
 	end
-  end
-  
-  
-  return came_from_value
+	return came_from_value
 end

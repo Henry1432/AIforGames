@@ -2,59 +2,59 @@ vec2 = {}
 vec2.__index = vec2
 
 function vec2.__add(a, b)
-  if type(a) == "number" then
-    return vec2.new(b.x + a, b.y + a)
-  elseif type(b) == "number" then
-    return vec2.new(a.x + b, a.y + b)
-  else
-    return vec2.new(a.x + b.x, a.y + b.y)
-  end
+	if type(a) == "number" then
+		return vec2.new(b.x + a, b.y + a)
+	elseif type(b) == "number" then
+		return vec2.new(a.x + b, a.y + b)
+	else
+		return vec2.new(a.x + b.x, a.y + b.y)
+	end
 end
 
 function vec2.__sub(a, b)
-  if type(a) == "number" then
-    return vec2.new(b.x - a, b.y - a)
-  elseif type(b) == "number" then
-    return vec2.new(a.x - b, a.y - b)
-  else
-    return vec2.new(a.x - b.x, a.y - b.y)
-  end
+	if type(a) == "number" then
+		return vec2.new(b.x - a, b.y - a)
+	elseif type(b) == "number" then
+		return vec2.new(a.x - b, a.y - b)
+	else
+		return vec2.new(a.x - b.x, a.y - b.y)
+	end
 end
 
 function vec2.__mul(a, b)
-  if type(a) == "number" then
-    return vec2.new(b.x * a, b.y * a)
-  elseif type(b) == "number" then
-    return vec2.new(a.x * b, a.y * b)
-  else
-    return vec2.new(a.x * b.x, a.y * b.y)
-  end
+	if type(a) == "number" then
+		return vec2.new(b.x * a, b.y * a)
+	elseif type(b) == "number" then
+		return vec2.new(a.x * b, a.y * b)
+	else
+		return vec2.new(a.x * b.x, a.y * b.y)
+	end
 end
 
 function vec2.__div(a, b)
-  if type(a) == "number" then
-    return vec2.new(b.x / a, b.y / a)
-  elseif type(b) == "number" then
-    return vec2.new(a.x / b, a.y / b)
-  else
-    return vec2.new(a.x / b.x, a.y / b.y)
-  end
+	if type(a) == "number" then
+		return vec2.new(b.x / a, b.y / a)
+	elseif type(b) == "number" then
+		return vec2.new(a.x / b, a.y / b)
+	else
+		return vec2.new(a.x / b.x, a.y / b.y)
+	end
 end
 
 function vec2.__eq(a, b)
-  return a.x == b.x and a.y == b.y
+	return a.x == b.x and a.y == b.y
 end
 
 function vec2.__lt(a, b)
-  return a.x < b.x or (a.x == b.x and a.y < b.y)
+	return a.x < b.x or (a.x == b.x and a.y < b.y)
 end
 
 function vec2.__le(a, b)
-  return a.x <= b.x and a.y <= b.y
+	return a.x <= b.x and a.y <= b.y
 end
 
 function vec2.__tostring(a)
-  return "(" .. a.x .. ", " .. a.y .. ")"
+	return "(" .. a.x .. ", " .. a.y .. ")"
 end
 
 function vec2.new(x, y)
