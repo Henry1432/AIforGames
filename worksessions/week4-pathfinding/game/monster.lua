@@ -3,6 +3,16 @@ local Vec2 = require("utils.vector")
 local Monster = {}
 Monster.__index = Monster
 
+local has_line_of_sight = function(grid, plot)
+    for i, v in ipairs(plot) do
+        if grid:get((v.x), (v.y)) then
+            return false;
+        end
+    end
+    
+    return true
+end
+
 -- TODO: calculate a path
 local pathfinding_force = function(self)
     local force = Vec2(0, 0)
@@ -75,12 +85,21 @@ function Monster:update(dt)
     self.heading = pathfinding_force(self)
 	self.heading = self.heading + (seperation_force(self, 30) * 0.7)
 	self.heading:normalize()
+	
+    local mx, my = love.mouse.getPosition()
+    local gridPosition = Vec2(math.floor(self.position.x / 16), math.floor(self.position.y / 16))
+    local plot = bresenham(gridPosition.x, gridPosition.y, math.floor(mx / 16), math.floor(my / 16))
 
-    -- TODO: implement other behaviors
+    if has_line_of_sight(self.world.grid, plot) then
+        self.heading = (Vec2(mx, my) - self.position):normalize()
+    else
+        self.heading = pathfinding_force(self)
+	end
 
     -- physics:
     self.position.x = self.position.x + (self.heading.x * 15 * dt)
     self.position.y = self.position.y + (self.heading.y * 15 * dt)
+	
 end
 
 function Monster:draw()

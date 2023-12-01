@@ -9,8 +9,9 @@ function Pheromone.new(world, position)
     local self = setmetatable({}, Pheromone)
     self.world = world
     self.position = Vec2(position.x, position.y)
+	self.radius = 3
 	
-	world.shash:add(self, self.position.x, self.position.y, self.position.x/16, self.position.y/16)
+	world.shash:add(self, self.position.x, self.position.y, self.radius*2, self.radius*2)
     return self
 end
 
@@ -20,7 +21,7 @@ end
 
 function Pheromone:draw()
     love.graphics.setColor(0.2, 0.3, 0.9)
-    love.graphics.circle("fill", self.position.x, self.position.y, 3)
+    love.graphics.circle("fill", self.position.x, self.position.y, self.radius)
 
 end
 

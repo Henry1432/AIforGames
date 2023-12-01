@@ -57,7 +57,7 @@ function love.update(dt)
     ---- update the hero
     ---- update the monsters:
 	
-	
+	print("test")
     for _, ant in ipairs(world.ants) do
         ant:update(dt)
    end
