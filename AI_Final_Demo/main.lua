@@ -55,7 +55,40 @@ function love.load()
 	world = World.new()
 	
 	local w, h = love.graphics.getDimensions()
-	world.grid = Grid.new(50, 50)
+	world.grid = Grid.new(50, 50, true, 3)
+	
+	local t = not world.grid:get(0,0)
+	local f = world.grid:get(0,0)
+	
+	for y = 0, (world.grid.h - 1) do
+		for x = 0, (world.grid.w - 1) do
+			local chance = love.math.random(100)
+			if(chance > 82) then
+				world.grid:set(x, y, t)
+			end
+		end
+	end
+	
+	for i = 0, 2 do
+		for y = 0, (world.grid.h - 1) do
+			for x = 0, (world.grid.w - 1) do
+				local neighbors = world.grid:get_neighbors(x, y)
+				local count = 0
+				
+				for _, n in ipairs(neighbors) do
+					if(world.grid:get(n.x, n.y) == true) then
+						count = count + 1
+					end
+				end
+				
+				if(count >= 2) then
+					world.grid:set_by_index(world.grid:get_index(x, y), t)
+				else
+					world.grid:set_by_index(world.grid:get_index(x, y), f)
+				end
+			end
+		end
+	end
 	
 	for i = 0, monster_count do
 		table.insert(world.monsters, Monster.new(world))

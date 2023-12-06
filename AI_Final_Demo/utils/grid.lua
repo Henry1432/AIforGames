@@ -1,7 +1,7 @@
 local grid = {}
 grid.__index = grid
 
-function grid.new(w, h)
+function grid.new(w, h, rand, prob)
 	local self = setmetatable({}, grid)
 	self.w = w
 	self.h = h
@@ -27,6 +27,16 @@ end
 function grid:set(cx, cy, n)
 	self.mt[1 + cx + cy * self.w] = n
 end
+
+
+function grid:get_by_index(index)
+	return self.mt[index]
+end
+
+function grid:set_by_index(index, value)
+	self.mt[index] = value
+end
+
 
 function grid:clear()
 	for i = 1, self.w * self.h do
